@@ -13,14 +13,14 @@ class RegisterBox extends Component {
     };
   }
 
-  showValidationErr(elm, msg) {
+  showValidationErr(elm, msg) {   //elm=username, msg= Username cannot be empty
     this.setState(prevState => ({
       errors: [...prevState.errors, { elm, msg }]
     }));
   }
 
   clearValidationErr(elm) {
-    this.setState((prevState) =>{
+    this.setState(prevState =>{
       let newArr =[];
       for(let err of prevState.errors) {
         if(elm !== err.elm) {
@@ -54,7 +54,7 @@ class RegisterBox extends Component {
     this.setState({
       pwdState: "weak"
     })
-    if(e.target.value.length > 8) {
+    if(e.target.value.length > 8 && e.target.value.length <= 12) {
       this.setState({
         pwdState: "medium"
       })
@@ -77,8 +77,6 @@ class RegisterBox extends Component {
       this.showValidationErr("password", "Password cannot be empty");
     }
   }
-
-  
 
   render() { 
     let usernameErr = null;

@@ -9,7 +9,7 @@ class LoginBox extends Component {
     }
   }
   
-  submitLogin(e) {
+  submitLogin = (e) =>{
 
   }
   
