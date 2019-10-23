@@ -78,6 +78,24 @@ class RegisterBox extends Component {
     }
   }
 
+  
+
+  render() { 
+    let usernameErr = null;
+    let passwordErr = null;
+    let emailErr = null;
+
+    for (let err of this.state.errors) {
+      if (err.elm === "username") {
+        usernameErr = err.msg;
+      }
+      if (err.elm === "password") {
+        passwordErr = err.msg;
+      }
+      if (err.elm === "email") {
+        emailErr = err.msg;
+      }
+    }
   let pwdWeak = false;
   let pwdMedium = false;
   let pwdStrong = false;
@@ -94,23 +112,6 @@ class RegisterBox extends Component {
     pwdMedium = true;
     pwdStrong = true;
   }
-
-  render() {
-    let usernameErr = null;
-    let passwordErr = null;
-    let emailErr = null;
-
-    for (let err of this.state.errors) {
-      if (err.elm === "username") {
-        usernameErr = err.msg;
-      }
-      if (err.elm === "password") {
-        passwordErr = err.msg;
-      }
-      if (err.elm === "email") {
-        emailErr = err.msg;
-      }
-    }
     return (
       <div className="inner-container">
         <div className="header">Register</div>
@@ -156,11 +157,11 @@ class RegisterBox extends Component {
               { passwordErr ? passwordErr : ""}
             </small>
 
-            <div className="password-state">
-              <div className={"pwd pwd-weak"}></div>
-              <div className={"pwd pwd-medium"}></div>
-              <div className={"pwd pwd-strong"}></div>
-            </div>
+           {this.state.password && <div className="password-state">
+              <div className={"pwd pwd-weak "+(pwdWeak ? "show" : "")}></div>
+              <div className={"pwd pwd-medium "+(pwdMedium ? "show" : "")}></div>
+              <div className={"pwd pwd-strong "+(pwdStrong ? "show" : "")}></div>
+            </div>} 
           </div>
           <button
             type="button"
@@ -174,5 +175,4 @@ class RegisterBox extends Component {
     );
   }
 }
-
 export default RegisterBox;
