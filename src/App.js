@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import LoginBox from "./component/LoginBox";
 import RegisterBox from "./component/RegisterBox";
-import '../src/css/Style.css';
+import "../src/css/Style.css";
 
 class App extends Component {
   constructor(props) {
@@ -13,11 +13,30 @@ class App extends Component {
     };
   }
 
+  showLoginBox() {
+    this.setState({ isLoginOpen: true, isRegisterOpen: false });
+  }
+
+  showRegisterBox() {
+    this.setState({ isRegisterOpen: true, isLoginOpen: false });
+  }
+
   render() {
     return (
-      <div className="box-container">
-        {this.state.isLoginOpen && <LoginBox />}
-        {this.state.isRegisterOpen && <RegisterBox />}
+      <div className="root-container">
+        <div className="box-controller">
+          <div className="controller" onClick={this.showLoginBox.bind(this)}>
+            Login
+          </div>
+          <div className="controller" onClick={this.showRegisterBox.bind(this)}>
+            Register
+          </div>
+        </div>
+
+        <div className="box-container">
+          {this.state.isLoginOpen && <LoginBox />}
+          {this.state.isRegisterOpen && <RegisterBox />}
+        </div>
       </div>
     );
   }
