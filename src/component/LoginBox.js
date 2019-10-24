@@ -5,15 +5,66 @@ class LoginBox extends Component {
     super(props)
   
     this.state = {
-       
+       username:"",
+       password:"",
+       errors:[],
     }
   }
   
-  submitLogin = (e) =>{
+  showValidationErr(elm, msg) {
+    this.setState((prevState) => ({
+      errors: [...prevState.errors, { elm, msg }]
+    }));
+  }
 
+  clearValidationErr(elm) {
+    this.setState((prevState) =>{
+      let newArr=[];
+      for(let err of prevState.errors){
+        if(elm !== err.elm) {
+          newArr.push(err);
+        }
+      }
+      return {errors: newArr} ;
+    })
+  }
+
+
+  onUsernameChange(e) {
+    this.setState({
+      username: e.target.value
+    });
+    this.clearValidationErr("username");
+  }
+
+  onPasswordChange(e) {
+    this.setState({
+      password: e.target.value
+    });
+    this.clearValidationErr("password");
+  }
+
+  submitLogin = (e) =>{
+    if(this.state.username === "") {
+      this.showValidationErr("username","Username cannot be empty");
+    }
+    if(this.state.password === "") {
+      this.showValidationErr("password","Password cannot be empty");
+    }
   }
   
   render() {
+    let usernameErr = null;
+    let passwordErr = null;
+
+    for (let err of this.state.errors) {
+      if(err.elm === "username") {
+        usernameErr = err.msg;
+      }
+      if(err.elm === "password") {
+        passwordErr = err.msg;
+      }
+    }
     return (
       <div className="inner-container">
         <div className="header">Login</div>
@@ -25,7 +76,9 @@ class LoginBox extends Component {
               name="username"
               className="login-input"
               placeholder="Username"
+              onChange={this.onUsernameChange.bind(this)}
             />
+            <small className="danger-error">{usernameErr ? usernameErr : ""}</small>
           </div>
 
           <div className="input-group">
@@ -35,7 +88,9 @@ class LoginBox extends Component {
               name="password"
               className="login-input"
               placeholder="Password"
+              onChange={this.onPasswordChange.bind(this)}
             />
+            <small className="danger-error">{passwordErr ? passwordErr : ""}</small>
           </div>
 
           <button

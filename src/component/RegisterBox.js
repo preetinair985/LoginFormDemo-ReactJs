@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 class RegisterBox extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +18,7 @@ class RegisterBox extends Component {
     }));
   }
 
-  clearValidationErr(elm) {
+  clearValidationErr(elm) { //elm=username
     this.setState(prevState =>{
       let newArr =[];
       for(let err of prevState.errors) {
