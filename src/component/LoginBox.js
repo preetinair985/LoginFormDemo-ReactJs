@@ -2,33 +2,32 @@ import React, { Component } from "react";
 
 class LoginBox extends Component {
   constructor(props) {
-    super(props)
-  
+    super(props);
+
     this.state = {
-       username:"",
-       password:"",
-       errors:[],
-    }
+      username: "",
+      password: "",
+      errors: []
+    };
   }
-  
+
   showValidationErr(elm, msg) {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       errors: [...prevState.errors, { elm, msg }]
     }));
   }
 
   clearValidationErr(elm) {
-    this.setState((prevState) =>{
-      let newArr=[];
-      for(let err of prevState.errors){
-        if(elm !== err.elm) {
+    this.setState(prevState => {
+      let newArr = [];
+      for (let err of prevState.errors) {
+        if (elm !== err.elm) {
           newArr.push(err);
         }
       }
-      return {errors: newArr} ;
-    })
+      return { errors: newArr };
+    });
   }
-
 
   onUsernameChange(e) {
     this.setState({
@@ -44,24 +43,24 @@ class LoginBox extends Component {
     this.clearValidationErr("password");
   }
 
-  submitLogin = (e) =>{
-    if(this.state.username === "") {
-      this.showValidationErr("username","Username cannot be empty");
+  submitLogin = e => {
+    if (this.state.username === "") {
+      this.showValidationErr("username", "Username cannot be empty");
     }
-    if(this.state.password === "") {
-      this.showValidationErr("password","Password cannot be empty");
+    if (this.state.password === "") {
+      this.showValidationErr("password", "Password cannot be empty");
     }
-  }
-  
+  };
+
   render() {
     let usernameErr = null;
     let passwordErr = null;
 
     for (let err of this.state.errors) {
-      if(err.elm === "username") {
+      if (err.elm === "username") {
         usernameErr = err.msg;
       }
-      if(err.elm === "password") {
+      if (err.elm === "password") {
         passwordErr = err.msg;
       }
     }
@@ -78,7 +77,9 @@ class LoginBox extends Component {
               placeholder="Username"
               onChange={this.onUsernameChange.bind(this)}
             />
-            <small className="danger-error">{usernameErr ? usernameErr : ""}</small>
+            <small className="danger-error">
+              {usernameErr ? usernameErr : ""}
+            </small>
           </div>
 
           <div className="input-group">
@@ -90,7 +91,9 @@ class LoginBox extends Component {
               placeholder="Password"
               onChange={this.onPasswordChange.bind(this)}
             />
-            <small className="danger-error">{passwordErr ? passwordErr : ""}</small>
+            <small className="danger-error">
+              {passwordErr ? passwordErr : ""}
+            </small>
           </div>
 
           <button

@@ -25,10 +25,22 @@ class App extends Component {
     return (
       <div className="root-container">
         <div className="box-controller">
-          <div className={"controller " + (this.state.isLoginOpen ? "selected-controller" : "")} onClick={this.showLoginBox.bind(this)}>
+          <div
+            className={
+              "controller " +
+              (this.state.isLoginOpen ? "selected-controller" : "")
+            }
+            onClick={this.showLoginBox.bind(this)}
+          >
             Login
           </div>
-          <div className={"controller " + (this.state.isRegisterOpen ? "selected-controller" : "")} onClick={this.showRegisterBox.bind(this)}>
+          <div
+            className={
+              "controller " +
+              (this.state.isRegisterOpen ? "selected-controller" : "")
+            }
+            onClick={this.showRegisterBox.bind(this)}
+          >
             Register
           </div>
         </div>
